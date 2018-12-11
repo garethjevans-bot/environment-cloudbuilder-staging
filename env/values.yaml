@@ -31,3 +31,22 @@ jenkins:
   enabled: false
 controllerbuild:
   enabled: true
+expose:
+  config:
+    domain: 35.241.204.164.nip.io
+    exposer: Ingress
+    http: "true"
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+jenkins:
+  Servers:
+    GHE:
+    - Name: GHE
+      Url: https://github.beescloud.com/api/v3/
+    Global:
+      EnvVars:
+        TILLER_NAMESPACE: kube-system
+  enabled: false
+controllerbuild:
+  enabled: true
